@@ -2,11 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.aware.plugin.temporalux">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme"
         tools:replace="android:icon, android:theme">
 
+        <activity android:name="com.aware.plugin.temporalux.Settings" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <service android:name="com.aware.plugin.temporalux.Plugin" android:exported="true"/>
+        <service android:name="com.aware.plugin.temporalux.Questionnaire_end" android:exported="true"/>
+
+        <provider android:name="com.aware.plugin.temporalux.Provider"
+            android:authorities="${applicationId}.provider.temporalux"
+            android:exported="true"
+            android:readPermission="com.aware.READ_CONTEXT_DATA"
+            android:writePermission="com.aware.WRITE_CONTEXT_DATA"/>
+
     </application>
 
 </manifest>
