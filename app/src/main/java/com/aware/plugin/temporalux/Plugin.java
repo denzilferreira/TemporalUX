@@ -63,6 +63,7 @@ public class Plugin extends Aware_Plugin {
                 getContentResolver().insert(Provider.TemporalUX_Data.CONTENT_URI, snapData);
             }
         }
+        if( snapshot != null && ! snapshot.isClosed() ) snapshot.close();
 
         DATABASE_TABLES = Provider.DATABASE_TABLES;
         TABLES_FIELDS = Provider.TABLES_FIELDS;
@@ -155,9 +156,10 @@ public class Plugin extends Aware_Plugin {
                 Cursor app = context.getContentResolver().query(Applications_Provider.Applications_Foreground.CONTENT_URI, null, null, null, Applications_Provider.Applications_Foreground.TIMESTAMP + " DESC LIMIT 2");
                 if( app != null && app.moveToFirst() ) {
                     current_app = app.getString(app.getColumnIndex(Applications_Provider.Applications_Foreground.PACKAGE_NAME));
-                    app.moveToNext();
-                    package_name = app.getString(app.getColumnIndex(Applications_Provider.Applications_Foreground.PACKAGE_NAME));
-                    app_name = app.getString(app.getColumnIndex(Applications_Provider.Applications_Foreground.APPLICATION_NAME));
+                    if( app.moveToNext() ) {
+                        package_name = app.getString(app.getColumnIndex(Applications_Provider.Applications_Foreground.PACKAGE_NAME));
+                        app_name = app.getString(app.getColumnIndex(Applications_Provider.Applications_Foreground.APPLICATION_NAME));
+                    }
                 }
                 if( app != null && ! app.isClosed() ) app.close();
 
@@ -974,8 +976,7 @@ public class Plugin extends Aware_Plugin {
      * @return boolean
      */
     private static boolean isSystemPackage(PackageInfo pkgInfo) {
-        if( pkgInfo == null ) return false;
-        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1);
+        return pkgInfo != null && ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1);
     }
 
     private static boolean isSystemPackage(Context c, String package_name) {
