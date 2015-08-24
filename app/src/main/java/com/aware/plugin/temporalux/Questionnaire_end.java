@@ -24,28 +24,28 @@ public class Questionnaire_end extends IntentService {
     protected void onHandleIntent(Intent intent) {
         int days_in_study = 0;
         if( Aware.getSetting(this, "study_start").length() > 0 ) {
-            days_in_study = (int)( (System.currentTimeMillis()-Double.valueOf(Aware.getSetting(this, "study_start")))/(1000*60*60*24) );
+            days_in_study = (int)( (System.currentTimeMillis()-Double.valueOf(Aware.getSetting(getApplicationContext(), "study_start")))/(1000*60*60*24) );
         }
         if( days_in_study == 0 ) days_in_study = 1;
 
         JSONArray esm_queue = new JSONArray();
         Cursor installations = getContentResolver().query(Installations_Provider.Installations_Data.CONTENT_URI, null, null, null, Installations_Provider.Installations_Data.APPLICATION_NAME + " ASC");
-        try {
-            JSONObject question = new JSONObject();
-            JSONObject esmJSON = new JSONObject();
-            esmJSON.put("esm_type", ESM.TYPE_ESM_QUICK_ANSWERS);
-            esmJSON.put("esm_title", "Final questionnaire");
-            esmJSON.put("esm_instructions", "During the last " + days_in_study + " day(s), you have installed " + installations.getCount() + " apps. We will now ask you to rate each one, one last time.");
-            esmJSON.put("esm_quick_answers", new JSONArray().put("OK"));
-            esmJSON.put("esm_expiration_threshold", 300);
-            esmJSON.put("esm_trigger", "qEnd");
-            question.put("esm", esmJSON);
-            esm_queue.put(question);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         if( installations != null && installations.moveToFirst() ) {
+            try {
+                JSONObject question = new JSONObject();
+                JSONObject esmJSON = new JSONObject();
+                esmJSON.put("esm_type", ESM.TYPE_ESM_QUICK_ANSWERS);
+                esmJSON.put("esm_title", "Final questionnaire");
+                esmJSON.put("esm_instructions", "During the last " + days_in_study + " day(s), you have installed " + installations.getCount() + " apps. We will now ask you to rate each one, one last time.");
+                esmJSON.put("esm_quick_answers", new JSONArray().put("OK"));
+                esmJSON.put("esm_expiration_threshold", 300);
+                esmJSON.put("esm_trigger", "qEnd");
+                question.put("esm", esmJSON);
+                esm_queue.put(question);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             do {
                 try {
                     JSONObject question = new JSONObject();
