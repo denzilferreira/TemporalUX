@@ -29,7 +29,7 @@ public class Provider extends ContentProvider {
     private static final int TEMPORALUX = 1;
     private static final int TEMPORALUX_ID = 2;
 
-    public static final String DATABASE_NAME = Environment.getExternalStorageDirectory() + "/AWARE/plugin_temporalux.db";
+    public static final String DATABASE_NAME = "plugin_temporalux.db";
     public static final String[] DATABASE_TABLES = {"plugin_temporalux"};
     public static final String[] TABLES_FIELDS = {
             TemporalUX_Data._ID + " integer primary key autoincrement," +

@@ -1,53 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFF">
+    android:layout_height="match_parent">
+    <include layout="@layout/aware_toolbar" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingTop="10dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:adjustViewBounds="true"
+                android:maxHeight="40dp"
+                android:src="@drawable/oulu" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oulu"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:adjustViewBounds="true"
+                android:maxHeight="40dp"
+                android:src="@drawable/copenhagen" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Copenhagen"
+                />
+        </LinearLayout>
 
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Thanks!"
-        android:id="@+id/textView"
+        android:text="Consent form"
+        android:id="@+id/heading"
         android:layout_margin="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="We would like to thank you for participating in our study. At the end of the study, you'll be instructed to press this button and fill out a final questionnaire.\n\nThanks once again for your participation!"
-        android:id="@+id/textView2"
-        android:layout_margin="10dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End participation!"
-        android:id="@+id/end_participation"
-        android:layout_gravity="center_horizontal" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="10dp">
-
-        <ImageView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/oulu"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginRight="10dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
-            android:src="@drawable/copenhagen"
-            android:layout_gravity="center_horizontal|bottom" />
-    </LinearLayout>
-
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/study_intro"
+            android:id="@+id/intro"
+            android:layout_margin="10dp" />
+    </ScrollView>
 </LinearLayout>

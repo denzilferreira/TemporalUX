@@ -40,10 +40,6 @@ public class Plugin extends Aware_Plugin {
     public void onCreate() {
         super.onCreate();
 
-//        Aware.setSetting(this, Aware_Preferences.STATUS_ESM, true);
-//        Aware.setSetting(this, Aware_Preferences.STATUS_APPLICATIONS, true);
-//        Aware.setSetting(this, Aware_Preferences.STATUS_INSTALLATIONS, true);
-
         IntentFilter filter = new IntentFilter();
         filter.addAction(Installations.ACTION_AWARE_APPLICATION_ADDED);
         filter.addAction(Installations.ACTION_AWARE_APPLICATION_REMOVED);
@@ -69,7 +65,7 @@ public class Plugin extends Aware_Plugin {
         TABLES_FIELDS = Provider.TABLES_FIELDS;
         CONTEXT_URIS = new Uri[]{ Provider.TemporalUX_Data.CONTENT_URI };
 
-        sendBroadcast(new Intent(Aware.ACTION_AWARE_REFRESH));
+        Aware.startPlugin(this, "com.aware.plugin.temporalux");
     }
 
     private static TemporalUXListener temporalUXListener = new TemporalUXListener();
@@ -960,14 +956,8 @@ public class Plugin extends Aware_Plugin {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         unregisterReceiver(temporalUXListener);
-
-        Aware.setSetting(this, Aware_Preferences.STATUS_ESM, false);
-        Aware.setSetting(this, Aware_Preferences.STATUS_APPLICATIONS, false);
-        Aware.setSetting(this, Aware_Preferences.STATUS_INSTALLATIONS, false);
-
-        sendBroadcast(new Intent(Aware.ACTION_AWARE_REFRESH));
+        Aware.stopPlugin(this, "com.aware.plugin.temporalux");
     }
 
     /**

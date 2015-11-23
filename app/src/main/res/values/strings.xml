@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">TemporalUX</string>
+    <string name="app_name">AppStat</string>
+    <string name="study_intro">
+"We study applications\' user experience on an Android mobile device (phone/tablet) over time (up to 12 months). The outcome of this study provides us with a clearer <b>understanding of how the application’s user experience changes and your rationale for the change</b>. This information has considerable design impact of future mobile device applications.\n"
+"<h1><b>Collected data</b></h1>"
+"\t-<b>Application usage</b>: the name of the application currently in use;"
+"\t-<b>Application installation states</b>: when an application is installed, removed and updated;"
+"\t-<b>User Experience Scores</b>: your user experience assessments in questionnaire form.\n"
+"<h1><b>Rewards</b></h1>"
+"We will split 1000€ across all the study participants, given out as an Amazon voucher. Addicionally, we will raffle one <b>Apple iPad Mini</b> between fully-compliant participants (<u>at least 6-month worth of data</u>).\n"
+"<h1><b>Confidenciality</b></h1>"
+"By participating, you understand and agree that the data and information gathered during the study may be used by University of Oulu and University of Copenhagen and published and/or disclosed by University of Oulu and University of Copenhagen to others outside of these universities for further analysis. However, no private data (name, address, contact information or other personal identifiers) in your consent form will be mentioned in any such publication or dissemination of the research data and/or results.\n"
+    </string>
+    <string name="action_settings">Contact us</string>
 </resources>
